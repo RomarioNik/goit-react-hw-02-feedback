@@ -1,4 +1,6 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   FeedbackList,
   FeedbackItem,
@@ -9,6 +11,14 @@ import {
 } from './Statistics.styled';
 
 class Statistics extends Component {
+  static propTypes = {
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+    total: PropTypes.number.isRequired,
+    positivePercentage: PropTypes.number.isRequired,
+  };
+
   render() {
     const { good, neutral, bad, total, positivePercentage } = this.props;
 
