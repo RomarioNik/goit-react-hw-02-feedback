@@ -1,17 +1,8 @@
 import { Component } from 'react';
-import {
-  Container,
-  Title,
-  ButtonList,
-  ButtonListItem,
-  Button,
-  FeedbackList,
-  FeedbackItem,
-  FeedbackCount,
-  FeedbackCountList,
-  FeedbackCountItem,
-  TextTotalCount,
-} from './App.styled';
+import Statistics from './Statistics';
+import FeedbackOptions from './FeedbackOptions';
+import Section from './Section';
+import { Container } from './App.styled';
 class App extends Component {
   state = {
     good: 0,
@@ -41,53 +32,26 @@ class App extends Component {
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
+
     return (
       <Container>
-        <Title>Please, leave feedback</Title>
+        <Section title="Please, leave feedback">
+          <FeedbackOptions
+            options={['good', 'neutral', 'bad']}
+            onLeaveFeedback={this.addFeedback}
+          />
+        </Section>
 
-        <ButtonList>
-          <ButtonListItem>
-            <Button type="button" onClick={() => this.addFeedback('good')}>
-              Good
-            </Button>
-          </ButtonListItem>
-          <ButtonListItem>
-            <Button type="button" onClick={() => this.addFeedback('neutral')}>
-              Neutral
-            </Button>
-          </ButtonListItem>
-          <ButtonListItem>
-            <Button type="button" onClick={() => this.addFeedback('bad')}>
-              Bad
-            </Button>
-          </ButtonListItem>
-        </ButtonList>
-
-        <FeedbackList>
-          <FeedbackItem>
-            <FeedbackCount>{this.state.good}</FeedbackCount>
-          </FeedbackItem>
-          <FeedbackItem>
-            <FeedbackCount>{this.state.neutral}</FeedbackCount>
-          </FeedbackItem>
-          <FeedbackItem>
-            <FeedbackCount>{this.state.bad}</FeedbackCount>
-          </FeedbackItem>
-        </FeedbackList>
-
-        <FeedbackCountList>
-          <FeedbackCountItem>
-            <TextTotalCount>
-              Total Feedback: {this.countTotalFeedback()}
-            </TextTotalCount>
-          </FeedbackCountItem>
-          <FeedbackCountItem>
-            <TextTotalCount>
-              Positive Feedback Percentage:{' '}
-              {this.countPositiveFeedbackPercentage()}%
-            </TextTotalCount>
-          </FeedbackCountItem>
-        </FeedbackCountList>
+        <Section title="Statistics">
+          <Statistics
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          ></Statistics>
+        </Section>
       </Container>
     );
   }
