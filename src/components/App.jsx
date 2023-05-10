@@ -29,7 +29,6 @@ class App extends Component {
       return 0;
     }
     const percentageCount = (this.state.good * 100) / totalFeedbacks;
-    console.log();
     return Number(percentageCount.toFixed());
   };
 
@@ -40,7 +39,7 @@ class App extends Component {
       <Container>
         <Section title="Please, leave feedback">
           <FeedbackOptions
-            options={['good', 'neutral', 'bad']}
+            options={Object.keys(this.state)}
             onLeaveFeedback={this.addFeedback}
           />
         </Section>

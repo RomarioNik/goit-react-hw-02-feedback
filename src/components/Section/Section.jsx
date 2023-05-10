@@ -1,23 +1,18 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { SectionContainer, Title } from './Section.styled';
 
-class Section extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
-  };
+const Section = ({ title, children }) => {
+  return (
+    <SectionContainer>
+      <Title>{title}</Title>
+      {children}
+    </SectionContainer>
+  );
+};
 
-  render() {
-    const { title, children } = this.props;
-    return (
-      <SectionContainer>
-        <Title>{title}</Title>
-        {children}
-      </SectionContainer>
-    );
-  }
-}
+Section.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.element.isRequired,
+};
 
 export default Section;
